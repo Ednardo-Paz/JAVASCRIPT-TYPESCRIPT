@@ -9,9 +9,9 @@
     color:var(--primary-color );
 } 
 .main-content{
-    max-width: 120rem;
+    max-width: 110rem;
     margin: 0 auto;
-    padding: var(--gap);
+    padding:8rem var(--gap);
 }
 .section{
     min-height: 100vh;
