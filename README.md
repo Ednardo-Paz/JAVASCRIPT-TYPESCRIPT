@@ -1,2 +1,2 @@
 # JAVASCRIPT&TYPESCRIPT
- Curso completo deJ AVASCRIPT e TYPESCRIPT gerido pelo professor Ótavio miranda.
+ Curso completo de JAVASCRIPT e TYPESCRIPT gerido pelo professor Ótavio miranda.
