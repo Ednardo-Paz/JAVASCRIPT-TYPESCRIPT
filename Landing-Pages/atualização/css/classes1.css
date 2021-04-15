@@ -5,11 +5,14 @@
     color: var(--white-color );
 }  
 .white-bg{
+    background-size: cover;
+    background-position: center center;
     background: var(--white-color);
     color:var(--primary-color );
+   
 } 
 .main-content{
-    max-width: 110rem;
+    max-width: 100rem;
     margin: 0 auto;
     padding:8rem var(--gap);
 }
@@ -19,3 +22,7 @@
 .menu-space{
      height: 6.5rem;
 }
+body .full-width{
+    width: 100%;
+    flex: 1 1 100%;
+} 

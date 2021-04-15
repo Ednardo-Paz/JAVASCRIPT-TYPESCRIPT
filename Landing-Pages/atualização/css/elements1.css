@@ -2,6 +2,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 html{
     font-size: 62.5%;
@@ -18,10 +19,10 @@ h1, h2, h3, h4, h5, h6{
 }
 h1{
     font-size: 6rem;
-    
+    text-transform: uppercase;
 }
 h2{
-    font-size: 8rem;
+    font-size: 6rem;
     margin-bottom: 5rem;
     text-transform: uppercase;
     line-height: 1.2;
@@ -48,4 +49,33 @@ a{
 }
 p{
     margin-bottom: 3rem;
+}
+table caption{
+    font-style: italic;
+    font-size: 1.6rem;
+    text-align: left;
+    margin-bottom: 1rem ;
+}
+.responsive-table{
+   
+    overflow: hidden;
+    overflow-x: auto;
+
+}
+table{
+    min-width: 36rem;
+    width: 100%;
+    border-collapse: collapse ;
+
+}
+table td, table th{
+    white-space: nowrap;
+    padding: 1rem;
+    border: 0.1rem solid #eeeeee;
+    text-align: left;
+   
+}
+
+table tfoot, thead{
+    background-color: #eeeeee;
 }
