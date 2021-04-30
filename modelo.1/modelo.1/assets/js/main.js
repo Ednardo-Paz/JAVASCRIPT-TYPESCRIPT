@@ -1,33 +1,42 @@
-// Capturar evento de submit do formulário
-const form = document.querySelector('#formulario');
+// pegar a classe formulário
+let form = document.querySelector(`#formulario`);
 
-form.addEventListener('submit', function (e) {
+form.addEventListener(`submit`, function (e) {
   e.preventDefault();
-  const inputPeso = e.target.querySelector('#peso');
-  const inputAltura = e.target.querySelector('#altura');
+  console.log(`ola`)
 
-  const peso = Number(inputPeso.value);
-  const altura = Number(inputAltura.value);
+
+  let inputPeso = e.target.querySelector(`#peso`);
+  let inputAltura = e.target.querySelector(`#altura`);
+
+  let peso = Number(inputPeso.value);
+  let altura = Number(inputAltura.value);
 
   if (!peso) {
-    setResultado('Peso inválido', false);
+    res(`Peso inválido.`, false);
     return;
   }
-
   if (!altura) {
-    setResultado('Altura inválida', false);
+    res(`Altura inválida.`, false);
     return;
   }
+  let imc = getImc(peso, altura);
+  let nivelImc = getNivelImc(imc);
 
-  const imc = getImc(peso, altura);
-  const nivelImc = getNivelImc(imc);
+  const msg = `Seu IMC é ${imc} ${nivelImc}`
 
-  const msg = `Seu IMC é ${imc} (${nivelImc}).`;
+  res(msg, true);
 
-  setResultado(msg, true);
-});
+  console.log(imc, nivelImc)
+})
 
-function getNivelImc (imc) {
+function getImc(peso, altura) {
+  const imc = peso / altura ** 2;
+  return (imc.toFixed(2));
+}
+
+
+function getNivelImc(imc) {
   const nivel = ['Abaixo do peso', 'Peso normal', 'Sobrepeso',
     'Obesidade grau 1', 'Obesidade grau 2', 'Obesidade grau 3'];
 
@@ -39,28 +48,21 @@ function getNivelImc (imc) {
   if (imc < 18.5) return nivel[0];
 }
 
-function getImc (peso, altura) {
-  const imc = peso / altura ** 2;
-  return imc.toFixed(2);
-}
 
-function criaP () {
-  const p = document.createElement('p');
+function criaP() {
+  let p = document.createElement(`p`);
   return p;
 }
 
-function setResultado (msg, isValid) {
-  const resultado = document.querySelector('#resultado');
-  resultado.innerHTML = '';
-
-  const p = criaP();
-
-  if (isValid) {
-    p.classList.add('paragrafo-resultado');
-  } else {
-    p.classList.add('bad');
+function res(msg, isValid) {
+  let res = document.querySelector(`#resultado`);
+  let p = criaP();
+  if(isValid == true){
+    p.classList = `paragrafo-resultado`;
+  }else{
+    p.classList = `bad`;
   }
-
+  res.innerHTML = ``;
   p.innerHTML = msg;
-  resultado.appendChild(p);
+  res.appendChild(p)
 }
