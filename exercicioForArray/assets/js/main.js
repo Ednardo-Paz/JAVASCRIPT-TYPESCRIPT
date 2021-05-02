@@ -9,13 +9,13 @@ let container = document.querySelector(`.container`);
 
 let div = document.createElement(`div`);
 
+
 for(let i = 0; i < elementos.length; i++){
- let { tag, texto}= elementos[i];
- console.log(tag, texto)
- let criartag = document.createElement(tag);
-  criartag.innerHTML = texto
-  div.appendChild(criartag)
-
+let{tag, texto} = elementos[i]
+let criarTag = document.createElement(tag)
+criarTag.innerHTML = texto
+div.appendChild(criarTag)
+console.log(criarTag)
 }
+container.appendChild(div)
 
-container.appendChild(div);
