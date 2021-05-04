@@ -1,66 +1,90 @@
-let form = document.querySelector(`#formulario`);
+let inputTarefa = document.querySelector(`.inputTarefa`)
+let btnTArefa = document.querySelector(`.btn-tarefa`)
+let tarefas = document.querySelector(`.tarefas`)
 
-form.addEventListener(`submit`, function(e){
-  e.preventDefault();
 
-  let inputPeso = document.querySelector(`#peso`);
-  let inputAltura = document.querySelector(`#altura`);
+//9 - Trazer o Array de volta 
+function addTarefasSalvas(){
 
-  let peso = Number (inputPeso.value);
-  let altura = Number (inputAltura.value);
+  let tarefas = localStorage.getItem(`tarefas`)
+  let listaDeTarefas = JSON.parse(tarefas);
+ 
+  console.log(listaDeTarefas)
 
-  if(!peso){
-    setResultado(`Peso invalido.`, false);
-    return;
+  for(tarefa of listaDeTarefas){
+    criarTarefa(tarefa )
+
+  } 
+}
+addTarefasSalvas()
+
+
+//8 -Salvar as tarefas.
+function salvarTarefas() {
+  liTarefas = tarefas.querySelectorAll(`li`);
+  listaDeTarefas = [];
+  
+  for(let tarefa of liTarefas){
+   let tarefaTexto = tarefa.innerText
+   tarefaTexto = tarefaTexto.replace(`Apagar`, ` `);
+   listaDeTarefas.push(tarefaTexto)
+   
   }
-  if(!altura){
-    setResultado(`Altura inválida.`, false)
+  let tarefaJson = JSON.stringify(listaDeTarefas);
+  localStorage.setItem(`tarefas`, tarefaJson);
+}
+
+//7 - Criar evento apagar.
+document.addEventListener(`click`, function (e) {
+  let el = e.target
+  if (el.classList.contains(`apagar`)) {
+    el.parentElement.remove();
+    salvarTarefas()
   }
-
-  let imc = getImc(altura, peso);
-  let nivel = getNivelImc(imc);
-
-  let msg = `Seu imc é ${imc}, ${nivel}`
-
-  setResultado(msg, true);
-
-
 })
 
-function getNivelImc(imc){
-  let nivel = [`Abaixo do peso`, `Peso normal`, `SobrePeso`, `Obesidade grau 1 `, , `Obesidade grau 2 `, `Obesidade grau 3`];
-  if (imc >= 39.9) return nivel[5];
-  if (imc >= 34.9) return nivel[4];
-  if (imc >= 29.9) return nivel[3];
-  if (imc >= 24.9) return nivel[2];
-  if (imc >= 18.5) return nivel[1];
-  if (imc <  18.5) return nivel[0];
+//6 Criar o botão de apagar
+function btnApagar(li) {
+  li.innerText += ` `;
+  let btnApagar = document.createElement(`button`);
+  btnApagar.innerText = `Apagar`
+  li.appendChild(btnApagar);
+  btnApagar.setAttribute(`class`, `apagar`);
+  btnApagar.setAttribute(`title`, `Apague`);
+
 }
-
-function getImc(altura, peso){
-  let imc = peso / altura **2;
-  return imc.toFixed(2);
+//5 - Limpar input
+function limparInput() {
+  inputTarefa.value = ``;
+  inputTarefa.focus();
 }
-
-
-
-function criaP(){
-  let p = document.createElement(`p`);
-  return p;
-}
-
-function setResultado(msg, isValid){
-  let res = document.querySelector(`.res`);
-  res.innerHTML = ``;
-  let p = criaP();
-
-  if(isValid){
-    p.classList = `paragrafo-resultado`
-
-  }else{
-    p.classList = `bad`
+//4 - Add tarefas com o enter
+inputTarefa.addEventListener(`keypress`, function (e) {
+  if (e.keyCode === 13) {
+    if (!inputTarefa.value) return;
+    criarTarefa(inputTarefa.value)
   }
-  p.innerHTML= msg;
-  res.appendChild(p);
- 
+})
+//3 - Retornar li
+function criaLi() {
+  let li = document.createElement(`li`);
+  return li;
 }
+
+
+//2 - função para pegar o texto do input e add na lista.
+function criarTarefa(inputtexto) {
+  let li = criaLi();
+  li.innerText = inputtexto;
+  tarefas.appendChild(li);
+  limparInput();
+  btnApagar(li);
+  salvarTarefas();
+
+}
+
+//1 - Criar evento btn
+btnTArefa.addEventListener(`click`, function () {
+  if (!inputTarefa.value) return;
+  criarTarefa(inputTarefa.value)
+})

@@ -5,22 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Lista de tarefas</title>
+  <title>Calcule seu IMC</title>
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
 
   <section class="container">
-    <h1>Lista de tarefas</h1>
+    <h1>Calcule seu IMC</h1>
+    <form action="/" id="formulario" method="POST">
+      <label for="peso">Peso</label>
+      <input type="text" id="peso" name="peso">
+      <label for="altura">Altura</label>
+      <input type="text" id="altura" name="altura">
+      <button type="submit">Enviar</button>
+    </form>
 
-    <p>
-      <input type="text" name="" class="inputTarefa">
-      <button class="btn-tarefa">Enviar</button>
-    </p>
-
-    <ul class="tarefas"></ul>
-
+    <div class="res"></div>
   </section>
 
   <script src="./assets/js/main.js"></script>
