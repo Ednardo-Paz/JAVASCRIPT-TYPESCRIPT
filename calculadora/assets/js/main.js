@@ -1,3 +1,4 @@
+//Factory function
 function criaCalculadora() {
   return {
     //- Atributos 
@@ -35,13 +36,15 @@ function criaCalculadora() {
     BtnParaDisplay(valor) {
       this.display.value += valor;
     },
+    //4 - Metodo para limpar o display
     clearDisplay() {
       this.display.value = ``;
     },
+    //5 - Metodo para apagar o ultimo número
     apagarUm() {
       this.display.value = this.display.value.slice(0, -1);
     },
-    //4 - Metodo para realizar a conta
+     //6- Metodo para realizar a conta
     realizaConta() {
       let conta = this.display.value;
 
@@ -59,7 +62,7 @@ function criaCalculadora() {
       }
      
     },
-    //5- Metodo para realizar conta precionando o enter.
+    //7- Metodo para realizar conta precionando o enter.
     precionaEnter(){
      this.display.addEventListener(`keypress`, e => {
         if(e.keyCode === 13){
