@@ -1,66 +1,76 @@
-let form = document.querySelector(`#formulario`);
-
-form.addEventListener(`submit`, function(e){
-  e.preventDefault();
-
-  let inputPeso = document.querySelector(`#peso`);
-  let inputAltura = document.querySelector(`#altura`);
-
-  let peso = Number (inputPeso.value);
-  let altura = Number (inputAltura.value);
-
-  if(!peso){
-    setResultado(`Peso invalido.`, false);
-    return;
-  }
-  if(!altura){
-    setResultado(`Altura inválida.`, false)
-  }
-
-  let imc = getImc(altura, peso);
-  let nivel = getNivelImc(imc);
-
-  let msg = `Seu imc é ${imc}, ${nivel}`
-
-  setResultado(msg, true);
+function criaCalculadora() {
+  return {
+    //- Atributos 
+    display: document.querySelector(`.display`),
+    btnClear: document.querySelector(`.btn-clear`),
 
 
-})
 
-function getNivelImc(imc){
-  let nivel = [`Abaixo do peso`, `Peso normal`, `SobrePeso`, `Obesidade grau 1 `, , `Obesidade grau 2 `, `Obesidade grau 3`];
-  if (imc >= 39.9) return nivel[5];
-  if (imc >= 34.9) return nivel[4];
-  if (imc >= 29.9) return nivel[3];
-  if (imc >= 24.9) return nivel[2];
-  if (imc >= 18.5) return nivel[1];
-  if (imc <  18.5) return nivel[0];
+
+    //metodos   
+    //1 - Metodo para iniciar a função e desencadear as outras;
+    inicia() {
+      this.cliqueBotoes();
+      this.precionaEnter();
+    },
+    //2- Metodo com evento para obter o clique das classe selecionada.
+    cliqueBotoes() {
+      document.addEventListener(`click`, (e) => {
+        let el = e.target;
+        if (el.classList.contains(`btn-num`)) {
+          this.BtnParaDisplay(el.innerText);
+        }
+        if (el.classList.contains(`btn-clear`)) {
+          this.clearDisplay();
+        }
+        if (el.classList.contains(`btn-del`)) {
+          this.apagarUm();
+        }
+        if (el.classList.contains(`btn-eq`)) {
+          this.realizaConta();
+        }
+      });
+    },
+    //3 - Metodo para adicionar o valor no display;
+    BtnParaDisplay(valor) {
+      this.display.value += valor;
+    },
+    clearDisplay() {
+      this.display.value = ``;
+    },
+    apagarUm() {
+      this.display.value = this.display.value.slice(0, -1);
+    },
+    //4 - Metodo para realizar a conta
+    realizaConta() {
+      let conta = this.display.value;
+
+      try {
+        conta = eval(conta);
+        if (!conta) {
+          alert(`Conta invalida`);
+          return
+        }
+        this.display.value = conta;
+
+      }catch (e){
+        alert(`Conta inválida`)
+        return;
+      }
+     
+    },
+    //5- Metodo para realizar conta precionando o enter.
+    precionaEnter(){
+     this.display.addEventListener(`keypress`, e => {
+        if(e.keyCode === 13){
+          this.realizaConta()
+        }
+      })
+    },
+
+
+  };
 }
 
-function getImc(altura, peso){
-  let imc = peso / altura **2;
-  return imc.toFixed(2);
-}
-
-
-
-function criaP(){
-  let p = document.createElement(`p`);
-  return p;
-}
-
-function setResultado(msg, isValid){
-  let res = document.querySelector(`.res`);
-  res.innerHTML = ``;
-  let p = criaP();
-
-  if(isValid){
-    p.classList = `paragrafo-resultado`
-
-  }else{
-    p.classList = `bad`
-  }
-  p.innerHTML= msg;
-  res.appendChild(p);
- 
-}
+const calculadora = criaCalculadora();
+calculadora.inicia();
