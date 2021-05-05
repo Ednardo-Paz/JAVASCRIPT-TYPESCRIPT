@@ -1,4 +1,8 @@
-let nome = `Ednardo`
-for(let i in nome){
-    console.log( i, nome[i])
+function recursiva(max){
+    console.log(max)
+if(max > 10) return
+max++
+recursiva(max)
+
 }
+recursiva(0)
