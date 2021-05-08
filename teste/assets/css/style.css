@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap');
+
+:root {
+  --primary-color       : rgb(17, 86, 102);
+  --primary-color-darker: rgb(9, 48, 56);
+}
+
+* {
+  box-sizing: border-box;
+  outline   : 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin     : 0;
+  padding    : 0;
+  background : var(--primary-color);
+  font-family: 'Open sans', sans-serif;
+  font-size  : 1.3rem;
+  line-height: 1.5rem;
+
+}
+
+.container {
+  max-width    : 64rem;
+  margin       : 5rem auto;
+  background   : #fff;
+  padding      : 2rem;
+  border-radius: 1rem;
+}
+
+form input,
+form label,
+form button {
+  display      : block;
+  width        : 100%;
+  margin-bottom: 1rem;
+}
+
+form input {
+  font-size: 2.4rem;
+  height   : 5rem;
+  padding  : 0 2rem;
+}
+
+form input:focus {
+  outline: 1px solid var(--primary-color);
+}
+
+form button {
+  border     : none;
+  background : var(--primary-color);
+  color      : #fff;
+  font-size  : 1.8rem;
+  font-weight: 700;
+  height     : 5rem;
+  cursor     : pointer;
+  margin-top : 3rem;
+}
+
+form button:hover {
+  background: var(--primary-color-darker);
+}
+
+.paragrafo-resultado,
+.bad {
+  background: rgb(109, 255, 182);
+  padding   : 1rem 2rem;
+}
+
+.bad {
+  background: rgb(255, 150, 150);
+}
+
+.quadrado{
+  width           : 250px;
+  height          : 250px;
+  background-color: black;
+  margin          : 50px;
+}
+
+.quadrado {
+  width           : 250px;
+  height          : 250px;
+  background-color: black;
+  margin          : 50px;
+}
+
+.quadrado {
+  width           : 250px;
+  height          : 250px;
+  background-color: black;
+  margin          : 50px;
+}
+
+.quadrado-blue {
+  width           : 250px;
+  height          : 250px;
+  background-color: rgb(56, 16, 149);
+  margin          : 50px;
+}
