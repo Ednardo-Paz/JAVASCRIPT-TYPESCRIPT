@@ -1,30 +1,46 @@
 
-//           0   1   2  3  4 ...
-// let numeros = [5, 50, 80, 1, 2 , 3 , 5, 8 , 7 ,200 , 15 , 22, 27 ];
+//Função construtora
+function ValidaCPF(cpfEnviado) {
+    Object.defineProperty(this, `cpfLimpo`, {
+        enumerable: true,
+        get: function(){
+            return cpfEnviado.replace(/\D+/g, ``);
+        }
+    })
+}
+//Metodo valida no prototype.
+ValidaCPF.prototype.valida = function(){
+    //se cpf não existir
+    if(typeof this.cpfLimpo === `undefined`) return false;
+    //se não tiver 11 números
+    if(this.cpfLimpo.length !== 11) return false
+    if(this.isSequencia()) return false
 
-// let numerosFiltrados = numeros.filter(valor => valor > 10 ) 
+    let cpfParcial = this.cpfLimpo.slice(0, -2); 
+    let digito1 = this.criaDigito(cpfParcial);
+    let digito2 = this.criaDigito(cpfParcial + digito1);
 
-// console.log(numerosFiltrados)
+    let novoCpf = cpfParcial + digito1 + digito2;
+    return novoCpf === this.cpfLimpo;
+};
+//recebe os 9 ou 10 primiros números
+ValidaCPF.prototype.criaDigito = function(cpfParcial){
+    let cpfArray = Array.from(cpfParcial)
+    let regressivo = cpfArray.length + 1;
+    let total = cpfArray.reduce((ac, val) => {
+        ac += (regressivo * Number(val));
+        regressivo--;
+        return ac;
+    }, 0);
+    const digito = 11 - (total % 11);
+    return digito > 9 ? `0` : String( digito);
+};
+ValidaCPF.prototype.isSequencia = function(){
+    const sequencia =  this.cpfLimpo[0].repeat(this.cpfLimpo.length);
+    return sequencia === this.cpfLimpo; 
+}
 
-// retorne o nome das pessoias que tem 5 letras ou mais.
-// Retorne as pessoas com mais de 50 anos
-//Retorne as pessoas cujo nome termina com a.
+//objeto
+const cpf = new ValidaCPF(`705.484.450-52`);
 
-let pessoas = [
-    { nome: `Luiz`, idade: 62 },
-    { nome: `Ednardo`, idade: 37 },
-    { nome: `Eduardo`, idade: 22 },
-    { nome: `Gina`, idade: 55 },
-    { nome: `Sara`, idade: 34 },
-    { nome: `Walace`, idade: 67 },
-
-];
-
-let pessoasComNOmeGrande = pessoas.filter(obj => obj.nome.length > 5)
-console.log(pessoasComNOmeGrande)
-let pessoasComMaisDe50 = pessoas.filter(obj => obj.idade >= 50)
-console.log(pessoasComMaisDe50)
-let pessoasNomeTerminaComA = pessoas.filter(obj => obj.nome.toLocaleLowerCase().endsWith(`a`))
-console.log(pessoasNomeTerminaComA)
-    
-
+console.log(cpf.valida())
