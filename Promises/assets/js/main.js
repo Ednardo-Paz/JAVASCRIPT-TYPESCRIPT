@@ -1,14 +1,46 @@
-// const request = OBJ => {
-//   const xhr = new XMLHttpRequest();
-//   xhr.open(obj.method, obj.url, true);
-//   xhr.send();
+// const promessa = new Promise((resolve, reject) => {
+//   let condicao = false;
+//   if (condicao) {
+//       setTimeout(() => {
+//           resolve({nome: `Ednardo`, idade: 37});
+//       },2000)
+//   } else {
+//     reject(Error(`um erro ocorreu na promise.`));
+//   }
+// });
 
-//   xhr.addEventListener(`load`, () => {
-//     if(xhr.status >= 200 && xhr.status <300) {
-//       obj.success(xhr.responseText);
-//     } else {
-//       obj.error(xhr.statusText);
-//     };
-//   });
-// }
-alert(`oi`)
+// const retorno = promessa
+// .then(resolucao => {
+//     console.log(resolucao);
+//     resolucao.profissao = `Desenvolvedor`
+//     return resolucao
+// })
+// .then(resolucao => {
+//     console.log(resolucao)
+// })
+// .catch(rejeitada => {
+//     console.log(rejeitada)
+// })
+// .finally(() => {
+//     console.log(`Acabou`)
+// })
+// console.log(retorno) 
+
+const login = new Promise (resolve => {
+    setTimeout(() => {
+        console.log(`Usuário logado.`)
+    }, 1000)
+})
+
+
+const dados = new Promise (resolve => {
+    setTimeout(() => {
+        console.log(`Dados carregados.`)
+    }, 1500)
+})
+
+const carregoTudo = Promise.all([login, dados])
+
+carregoTudo.then(resolucao => {
+    console.log(resolucao);
+})
